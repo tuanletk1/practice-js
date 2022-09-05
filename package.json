@@ -1,0 +1,13 @@
+{
+  "name": "big-practice",
+  "version": "1.0.0",
+  "description": "- This document provides the requirement for JavaScript Big Practice\r - Using HTML/CSS/JavaScript to build a website base on design\r - Design: [CRUD Operations](https://www.figma.com/file/0XJc2XGnzWf4lEP70kkxu8/Crud-Operations-(Community)?node-id=0%3A1)",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch ./src/fakeApi/db.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": []
+}

@@ -1,0 +1,366 @@
+body {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--second-color);
+  position: relative;
+  display: flex;
+  background-color: rgb(240, 239, 239);
+  font-family: Montserrat;
+}
+
+.sidebar {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: #f2eae1;
+  height: 100%;
+  width: 270px;
+}
+
+.sidebar .logo {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.logo > h1 {
+  position: relative;
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.logo>h1::before {
+  content: "";
+  position: absolute;
+  height: 22px;
+  width: 4px;
+  top: 0;
+  left: 25px;
+  background-color: var(--primary-color);
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile>img {
+  width: 100px;
+  border-radius: 50%;
+}
+
+.profile .name {
+  padding-top: 15px;
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 21px;
+}
+
+.profile .job {
+  padding-top: 10px;
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: var(--text-size-14);
+  line-height: var(--text-line-17);
+}
+
+.sidebar .menu {
+  height: 300px;
+}
+
+.sidebar .menu .menu-items {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar .menu li {
+  list-style: none;
+  width: 193px;
+  height: 30px;
+  line-height: 30px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sidebar .logout button:hover,
+.sidebar .menu li:hover {
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.sidebar .menu li:nth-child(3) {
+  background-color: var(--primary-color);
+}
+
+.sidebar .menu .icons {
+  padding-right: 10px;
+}
+
+.sidebar .logout,
+.sidebar .menu li a {
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: var(--text-size-14);
+  line-height: var(--text-line-17);
+}
+
+.sidebar .logout {
+  padding-bottom: 20px;
+}
+
+.sidebar .logout>button {
+  height: 50px;
+  width: 193px;
+  border: none;
+  background: none;
+  border-radius: 10px;
+}
+.sidebar .logout>button>img {
+  margin-left: 10px;
+}
+.main-content {
+  width: calc(100% - 270px);
+}
+
+.main-content .nav {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  background-color: #fff;
+  padding: 15px 30px;
+}
+
+.search {
+  padding: 10px 14px;
+  border: 1px solid #d7dbe6;
+  border-radius: 4px;
+}
+
+.search input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.main-dashboard {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.dashboard-top {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 11px;
+  border-bottom: var(--input-border);
+}
+
+.dashboard-title {
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 27px;
+}
+
+.btn-add {
+  width: 200px;
+  height: 44px;
+  border: none;
+  border-radius: 5px;
+  color: var(--second-color);
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  color: var(--primary-color);
+  background-color: var(--text-color);
+}
+
+/* ---------table list-------------- */
+
+.content table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.content .field-name>th {
+  position: sticky;
+  top: 0;
+  background-color: rgb(240, 239, 239);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--text-field);
+  height: 50px;
+  line-height: 50px;
+}
+
+td .img-avatar {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 1px solid #cccc;
+}
+
+.content {
+  max-height: 580px;
+  overflow-y: scroll;
+}
+.students-value td {
+  height: 85px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+table #students-list .students-value {
+  background-color: var(--second-color);
+}
+
+.students-value td:first-child {
+  border-left: var(--input-border);
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.students-value td:last-child {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-right: var(--input-border);
+}
+
+.action-btn {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* button -modal */
+#modal-container {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#modal-container.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#modal-container.show #modal {
+  top: 10px;
+}
+
+#modal {
+  background-color: #fff;
+  max-width: 500px;
+  position: relative;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  transition: all 0.35s ease-in-out;
+}
+
+#modal .modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid #dedede;
+}
+
+#modal .modal-header h3 {
+  margin: 0;
+}
+
+#btn-close {
+  cursor: pointer;
+  font-size: 30px;
+  border: none;
+  background: none;
+}
+
+.modal-body {
+  padding: 15px 20px 15px;
+}
+
+.form-lable {
+  padding-top: 40px;
+}
+
+.form-value .form-control {
+  width: 100%;
+  height: 35px;
+  border: var(--input-border);
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.btn-submit {
+  width: 150px;
+  height: 44px;
+  border: none;
+  border-radius: 5px;
+  color: var(--second-color);
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  color: var(--primary-color);
+  background-color: var(--text-color);
+}
+
+/* choose avatar  */
+.file {
+  position: relative;
+  display: flex;
+}
+
+.file>input[type="file"] {
+  display: none;
+}
+
+.file>label {
+  font-size: 16px;
+  font-weight: 300;
+  cursor: pointer;
+  outline: 0;
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  padding: 16px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-upload>label {
+  color: rgb(46, 166, 203);
+  border-color: rgb(122, 198, 221);
+}
+
+.file-upload>label:hover {
+  border-color: rgb(186, 228, 241);
+  background-color: rgb(186, 228, 241);
+}
