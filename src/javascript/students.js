@@ -3,6 +3,7 @@ import {
   createStudent,
   deleteStudent,
   updateStudent,
+  getId,
 } from "./method.js";
 
 import { LOGIN_PAGE } from "./constant.js";
@@ -113,7 +114,7 @@ const renderStudents = (student) => {
   // Popup to add user when clicking on edit button.
   btnEdit.forEach((item) => {
     item.addEventListener("click", () => {
-      modalContainer.classList.add("show");
+      showModal();
       handleUpdate(item.id);
     });
   });
@@ -127,8 +128,9 @@ const renderStudents = (student) => {
 };
 
 const handleSubmit = () => {
+  const id = getId();
   const formData = {
-    id: Math.floor(Math.random() * 1000),
+    id: id,
     name: nameStudent.value,
     email: emailStudent.value,
     phone: phoneStudent.value,
@@ -225,7 +227,7 @@ const handleUpdate = (id) => {
 
 const handleLogout = () => {
   localStorage.removeItem("user");
-  window.location.href = "./login.html";
+  window.location.href = LOGIN_PAGE;
 };
 
 btnAdd.addEventListener("click", showModal);

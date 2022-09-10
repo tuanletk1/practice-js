@@ -4,10 +4,9 @@ import { STUDENTS_PAGE } from "./constant.js";
 const $ = document.querySelector.bind(document);
 
 const loginBtn = $(".btn-login");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const messageError =
-  document.getElementById("message-error");
+const emailInput = $("#email");
+const passwordInput = $("#password");
+const messageError = $("#message-error");
 
 const user = JSON.parse(localStorage.getItem("user"));
 if (user) {

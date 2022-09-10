@@ -95,3 +95,8 @@ export const deleteStudent = async (id) => {
     console.log("Error: " + error);
   }
 };
+
+var id = 0;
+export const getId = () => {
+  return id++;
+};
