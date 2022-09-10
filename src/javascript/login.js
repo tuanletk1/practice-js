@@ -33,6 +33,7 @@ const handleLogin = async () => {
             job: checker.job,
           })
         );
+        console.log('done')
         window.location.href = STUDENTS_PAGE;
       } else {
         messageError.innerHTML =

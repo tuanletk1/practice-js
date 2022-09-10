@@ -1,3 +1,4 @@
+import { LOGIN_PAGE } from "./constant.js";
 import {
   getStudent,
   createStudent,
@@ -6,7 +7,9 @@ import {
   getId,
 } from "./method.js";
 
-import { LOGIN_PAGE } from "./constant.js";
+import {
+  START_ERROR_MESSAGE,
+} from "./constant.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -37,13 +40,16 @@ if (!user) {
 userName.innerHTML = user.name;
 userJob.innerHTML = user.job;
 
-const start = () => {
+const afterGet = (msg) => {
   getStudent()
-    .then((student) => renderStudents(student))
+    .then(students => renderStudents(students))
     .catch((error) => {
       console.log(error);
-      alert("Error: " + error);
+      alert("Error: " + msg);
     });
+}
+const start = () => {
+  afterGet(START_ERROR_MESSAGE);
   handleSearch();
 };
 
@@ -73,20 +79,20 @@ const uploadFile = () => {
   };
 };
 
-const renderStudents = (student) => {
+const renderStudents = (students) => {
   const studentList = $("#students-list");
 
-  const html = student
+  const html = students
     //Filter the name search box and display it on the table
     .filter(
-      (field) =>
-        field.name
+      (student) =>
+        student.getName()
           .toLowerCase()
           .includes(searchBox.value.trim()) ||
-        field.email
+        student.email
           .toLowerCase()
           .includes(searchBox.value.trim()) ||
-        field.phone
+        student.phone
           .toLowerCase()
           .includes(searchBox.value.trim())
     )

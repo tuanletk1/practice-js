@@ -4,10 +4,19 @@
   "description": "- This document provides the requirement for JavaScript Big Practice\r - Using HTML/CSS/JavaScript to build a website base on design\r - Design: [CRUD Operations](https://www.figma.com/file/0XJc2XGnzWf4lEP70kkxu8/Crud-Operations-(Community)?node-id=0%3A1)",
   "main": "index.js",
   "scripts": {
-    "start": "json-server --watch ./src/fakeApi/db.json",
+    "server": "json-server --watch ./src/fakeApi/db.json",
+    "dev": "npx parcel src/*.html ",
+    "start": "concurrently --kill-others \"npm run server\" \"npm run dev\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "concurrently": "^7.3.0",
+    "json-server": "^0.17.0"
+  }
 }

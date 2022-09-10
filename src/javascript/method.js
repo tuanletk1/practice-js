@@ -1,4 +1,6 @@
 import { REQUEST_URL } from "./environment.js";
+import { Student } from './model/Student.js'
+
 
 export const getUser = async () => {
   try {
@@ -26,8 +28,8 @@ export const getStudent = async () => {
       `${REQUEST_URL}/students`,
       options
     );
-    const students = await res.json();
-
+    const responseBody = await res.json();
+    const students = responseBody.map(obj => new Student(obj))
     return students;
   } catch (error) {
     console.log("Error: " + error);
