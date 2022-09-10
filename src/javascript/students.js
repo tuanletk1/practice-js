@@ -157,14 +157,17 @@ const handleSubmit = () => {
 
 // Delete student function
 const handleDelete = (id) => {
-  deleteStudent(id).then(() => {
-    getStudent()
-      .then((student) => renderStudents(student))
-      .catch((error) => {
-        console.log(error);
-        alert("Error: " + error);
-      });
-  });
+  const confirm = window.confirm("Do you want to delete this student ?");
+  if (confirm) {
+    deleteStudent(id).then(() => {
+      getStudent()
+        .then((student) => renderStudents(student))
+        .catch((error) => {
+          console.log(error);
+          alert("Error: " + error);
+        });
+    });
+  }
 };
 
 //Search students function
