@@ -3,12 +3,14 @@
     {
       "id": 1,
       "name": "Vu Phan",
+      "job": "admin",
       "email": "vuphan@gmail.com",
       "password": "123"
     },
     {
       "id": 2,
       "name": "Tuan Le",
+      "job": "admin",
       "email": "tuanle@gmail.com",
       "password": "123456"
     }

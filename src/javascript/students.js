@@ -26,15 +26,16 @@ const phoneStudent = $("#phone");
 const enrollNumber = $("#enroll-number");
 const dateOfAdmission = $("#date-of-admission");
 const avatar = $("#upload-avatar");
-const username = $(".name");
+const userName = $(".name");
+const userJob = $(".job");
 const avatarPreview = $("#avatar-preview");
 
 const user = JSON.parse(localStorage.getItem("user"));
 if (!user) {
   window.location.href = LOGIN_PAGE;
 }
-
-username.innerHTML = user.name;
+userName.innerHTML = user.name;
+userJob.innerHTML = user.job;
 
 const start = () => {
   getStudent()
@@ -46,19 +47,23 @@ const start = () => {
   handleSearch();
 };
 
+//Show modal
+const showModal = () => {
+  modalContainer.classList.add("show");
+};
+
+//Hiden modal
 const hideModal = () => {
   modalContainer.classList.remove("show");
 };
 
-const showModal = () => {
-  modalContainer.classList.add("show");
-};
 
 // Upload avatar picture
 avatar.onchange = () => {
   uploadFile();
 };
 
+//Returns the complete data of blob as a Data URL, essentially a Base64-encoded string of the file data.
 const uploadFile = () => {
   const reader = new FileReader();
   const file = avatar.files[0];
@@ -177,7 +182,6 @@ const handleSearch = () => {
 };
 
 // Update students function
-
 const handleUpdate = (id) => {
   getStudent()
     .then((student) => {
@@ -216,12 +220,10 @@ const handleUpdate = (id) => {
         });
     });
     hideModal();
-
     btnSave.removeEventListener("click", handleEdit);
   };
 
   btnSave.removeEventListener("click", handleSubmit);
-
   btnSave.addEventListener("click", handleEdit);
 };
 
@@ -232,9 +234,7 @@ const handleLogout = () => {
 
 btnAdd.addEventListener("click", showModal);
 btnClose.addEventListener("click", hideModal);
-
 btnSave.addEventListener("click", handleSubmit);
-
 logoutBtn.addEventListener("click", handleLogout);
 
 start();
