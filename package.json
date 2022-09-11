@@ -5,7 +5,7 @@
   "main": "login.js",
   "scripts": {
     "server": "json-server --watch ./src/fakeApi/db.json",
-    "dev": "npx parcel src/login.html ",
+    "dev": "parcel src/login.html ",
     "start": "concurrently --kill-others \"npm run server\" \"npm run dev\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
