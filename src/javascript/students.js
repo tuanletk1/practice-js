@@ -87,9 +87,16 @@ const uploadFile = () => {
 //delete checkbox
 checkAll.addEventListener("click", () => {
   const checkedArray = $$(".user-checkbox");
-  checkedArray.forEach(
-    (item) => (item.checked ? item.checked = true : item.checked = !item.checked)
-  );
+  checkedArray.forEach((item) => {
+    item.checked && checkAll.checked
+      ? (item.checked = true)
+      : (item.checked = !item.checked);
+    item.onclick = () => {
+      !item.checked && checkAll.checked
+        ? (checkAll.checked = false)
+        : true;
+    };
+  });
 });
 
 //Delete students checkbox
