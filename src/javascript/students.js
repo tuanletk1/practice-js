@@ -1,14 +1,10 @@
-import { LOGIN_PAGE } from "./constant.js";
+import { LOGIN_PAGE, MESSAGES } from "./constant.js";
 import {
   getStudent,
   createStudent,
   deleteStudent,
   updateStudent,
 } from "./method.js";
-
-import {
-  START_ERROR_MESSAGE,
-} from "./constant.js";
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -19,7 +15,7 @@ const btnAdd = $("#btn-add");
 const btnClose = $("#btn-close");
 const btnSave = $("#btn-save");
 const modalContainer = $("#modal-container");
-const btnDelete = $("#btn-delete-checked");
+const btnDeleteCheckbox = $("#btn-delete-checked");
 
 //Query elements
 const searchBox = $("#search-box");
@@ -32,16 +28,21 @@ const dateOfAdmission = $("#date-of-admission");
 const avatar = $("#upload-avatar");
 const userName = $(".name");
 const userJob = $(".job");
+const userAvatar = $(".avatar");
 const avatarPreview = $("#avatar-preview");
 const studentList = $("#students-list");
 const checkAll = $("#check-all");
 
+//Check protected route
 const user = JSON.parse(localStorage.getItem("user"));
 if (!user) {
   window.location.href = LOGIN_PAGE;
 }
+//Show user information
+userAvatar.src = user.avatar;
 userName.innerHTML = user.name;
 userJob.innerHTML = user.job;
+
 
 const afterGet = (msg) => {
   getStudent()
@@ -51,8 +52,9 @@ const afterGet = (msg) => {
       alert("Error: " + msg);
     });
 }
+
 const start = () => {
-  afterGet(START_ERROR_MESSAGE);
+  afterGet(MESSAGES.startError);
   handleSearch();
 };
 
@@ -90,6 +92,7 @@ checkAll.addEventListener("click", () => {
   );
 });
 
+//Delete students checkbox
 const handleCheckBox = async () => {
   const checked = Array.from($$(".user-checkbox")).filter(
     (item) => item.checked
@@ -163,6 +166,7 @@ const renderStudents = (students) => {
   });
 
   const btnDel = $$(".btn-delete");
+  // Popup to add user when clicking on delete button.
   btnDel.forEach((item) => {
     item.addEventListener("click", () => {
       handleDelete(item.id);
@@ -182,12 +186,7 @@ const handleSubmit = () => {
   };
 
   createStudent(formData).then(() => {
-    getStudent()
-      .then((student) => renderStudents(student))
-      .catch((error) => {
-        console.log(error);
-        alert("Error: " + error);
-      });
+    afterGet();
   });
   hideModal();
 };
@@ -208,14 +207,7 @@ const handleDelete = (id) => {
 //Search students function
 const handleSearch = () => {
   searchBox.addEventListener("keyup", function (e) {
-    getStudent()
-      .then((student) => {
-        renderStudents(student);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error: " + error);
-      });
+    afterGet();
   });
 };
 
@@ -235,8 +227,7 @@ const handleUpdate = (id) => {
       });
     })
     .catch((error) => {
-      console.log(error);
-      alert("Error: " + error);
+      alert("Error: " + MESSAGES.updateError);
     });
 
   const handleEdit = () => {
@@ -250,12 +241,7 @@ const handleUpdate = (id) => {
     };
 
     updateStudent(id, formData).then(() => {
-      getStudent()
-        .then((student) => renderStudents(student))
-        .catch((error) => {
-          console.log(error);
-          alert("Error: " + error);
-        });
+      afterGet();
     });
     hideModal();
     btnSave.removeEventListener("click", handleEdit);
@@ -273,7 +259,7 @@ const handleLogout = () => {
 btnAdd.addEventListener("click", showModal);
 btnClose.addEventListener("click", hideModal);
 btnSave.addEventListener("click", handleSubmit);
-btnDelete.addEventListener("click", handleCheckBox);
+btnDeleteCheckbox.addEventListener("click", handleCheckBox);
 logoutBtn.addEventListener("click", handleLogout);
 
 start();

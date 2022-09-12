@@ -1,6 +1,6 @@
 import { REQUEST_URL } from "./environment.js";
-import { Student } from './model/Student.js'
-
+import { Student } from "./model/student.js";
+import { User } from "./model/user.js";
 
 export const getUser = async () => {
   try {
@@ -11,8 +11,9 @@ export const getUser = async () => {
       `${REQUEST_URL}/users`,
       options
     );
-    const users = await res.json();
 
+    const responseAccount = await res.json();
+    const users = responseAccount.map(obj => new User(obj))
     return users;
   } catch (error) {
     console.log("Error: " + error);
@@ -28,6 +29,7 @@ export const getStudent = async () => {
       `${REQUEST_URL}/students`,
       options
     );
+
     const responseBody = await res.json();
     const students = responseBody.map(obj => new Student(obj))
     return students;
@@ -56,6 +58,7 @@ export const createStudent = async (data) => {
     console.log("Error: " + error);
   }
 };
+
 
 export const updateStudent = async (id, data) => {
   try {

@@ -31,7 +31,7 @@ body {
   line-height: 24px;
 }
 
-.logo>h1::before {
+.logo > h1::before {
   content: "";
   position: absolute;
   height: 22px;
@@ -47,7 +47,7 @@ body {
   align-items: center;
 }
 
-.profile>img {
+.profile > img {
   width: 100px;
   border-radius: 50%;
 }
@@ -119,14 +119,14 @@ body {
   padding-bottom: 20px;
 }
 
-.sidebar .logout>button {
+.sidebar .logout > button {
   height: 50px;
   width: 193px;
   border: none;
   background: none;
   border-radius: 10px;
 }
-.sidebar .logout>button>img {
+.sidebar .logout > button > img {
   margin-left: 10px;
 }
 .main-content {
@@ -173,7 +173,8 @@ body {
   line-height: 27px;
 }
 
-.btn-top {
+.btn-add,
+.btn-delete-checked {
   width: 200px;
   height: 44px;
   border: none;
@@ -183,7 +184,8 @@ body {
   cursor: pointer;
 }
 
-.btn-top:hover {
+.btn-add:hover,
+.btn-delete-checked:hover {
   color: var(--primary-color);
   background-color: var(--text-color);
 }
@@ -196,7 +198,7 @@ body {
   border-spacing: 0 10px;
 }
 
-.content .field-name>th {
+.content .field-name > th {
   position: sticky;
   top: 0;
   background-color: rgb(240, 239, 239);
@@ -337,11 +339,11 @@ table #students-list .students-value {
   display: flex;
 }
 
-.file>input[type="file"] {
+.file > input[type="file"] {
   display: none;
 }
 
-.file>label {
+.file > label {
   font-size: 16px;
   font-weight: 300;
   cursor: pointer;
@@ -355,12 +357,12 @@ table #students-list .students-value {
   align-items: center;
 }
 
-.file-upload>label {
+.file-upload > label {
   color: rgb(46, 166, 203);
   border-color: rgb(122, 198, 221);
 }
 
-.file-upload>label:hover {
+.file-upload > label:hover {
   border-color: rgb(186, 228, 241);
   background-color: rgb(186, 228, 241);
 }

@@ -1,16 +1,9 @@
-const LOGIN_PAGE = "login.html";
-const STUDENTS_PAGE = "students.html";
+export const LOGIN_PAGE = "login.html";
+export const STUDENTS_PAGE = "students.html";
 
-const START_ERROR_MESSAGE = "Cannot start";
-const CREATE_ERROR_MESSAGE = "";
-const DELETE_ERROR_MESSAGE = "";
-const UPDATE_ERROR_MESSAGE = "";
-
-export {
-  LOGIN_PAGE,
-  STUDENTS_PAGE,
-  START_ERROR_MESSAGE,
-  CREATE_ERROR_MESSAGE,
-  DELETE_ERROR_MESSAGE,
-  UPDATE_ERROR_MESSAGE
+export const MESSAGES = {
+  connectError:"Error connection refused",
+  startError:" Cannot start, please check again",
+  updateError: "Unable to update, please check the values",
+  deleteCheckboxError: "Error When deleting student!",
 }

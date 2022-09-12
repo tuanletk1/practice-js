@@ -2,15 +2,17 @@
   "users": [
     {
       "id": 1,
+      "avatar": "https://kenh14cdn.com/2019/11/10/photo-1-1573321816510299687168.jpeg",
       "name": "Vu Phan",
-      "job": "admin",
+      "job": "Admin",
       "email": "vuphan@gmail.com",
       "password": "123"
     },
     {
       "id": 2,
+      "avatar": "https://icdn.dantri.com.vn/thumb_w/680/2022/08/08/nhan-113-thu-moi-du-hoc-nam-sinh-xu-nghe-chon-o-lai-viet-nam-1-1659967996450.jpeg",
       "name": "Tuan Le",
-      "job": "admin",
+      "job": "Admin",
       "email": "tuanle@gmail.com",
       "password": "123456"
     }
