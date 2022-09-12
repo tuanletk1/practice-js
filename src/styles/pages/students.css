@@ -173,7 +173,7 @@ body {
   line-height: 27px;
 }
 
-.btn-add {
+.btn-top {
   width: 200px;
   height: 44px;
   border: none;
@@ -183,7 +183,7 @@ body {
   cursor: pointer;
 }
 
-.btn-add:hover {
+.btn-top:hover {
   color: var(--primary-color);
   background-color: var(--text-color);
 }

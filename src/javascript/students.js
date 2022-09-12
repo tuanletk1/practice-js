@@ -4,7 +4,6 @@ import {
   createStudent,
   deleteStudent,
   updateStudent,
-  getId,
 } from "./method.js";
 
 import {
@@ -14,11 +13,13 @@ import {
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+
 // Query elements modal
 const btnAdd = $("#btn-add");
 const btnClose = $("#btn-close");
 const btnSave = $("#btn-save");
 const modalContainer = $("#modal-container");
+const btnDelete = $("#btn-delete-checked");
 
 //Query elements
 const searchBox = $("#search-box");
@@ -32,6 +33,8 @@ const avatar = $("#upload-avatar");
 const userName = $(".name");
 const userJob = $(".job");
 const avatarPreview = $("#avatar-preview");
+const studentList = $("#students-list");
+const checkAll = $("#check-all");
 
 const user = JSON.parse(localStorage.getItem("user"));
 if (!user) {
@@ -79,10 +82,37 @@ const uploadFile = () => {
   };
 };
 
-const renderStudents = (students) => {
-  const studentList = $("#students-list");
+//delete checkbox
+checkAll.addEventListener("click", () => {
+  const checkedArray = $$(".user-checkbox");
+  checkedArray.forEach(
+    (item) => (item.checked ? item.checked = true : item.checked = !item.checked)
+  );
+});
 
-  const html = students
+const handleCheckBox = async () => {
+  const checked = Array.from($$(".user-checkbox")).filter(
+    (item) => item.checked
+  );
+  if (!checked.length) return;
+
+  const confirm = window.confirm(
+    "Are you sure you want to delete all checked user?"
+  );
+  if (!confirm) return;
+
+  for (const item of checked) {
+    await deleteStudent(item.value)
+  }
+  afterGet("Error When deleting student!");
+};
+
+/**
+ * Takes data from the API and displays it on a table in HTML
+ */
+const renderStudents = (students) => {
+
+  const studentListTable = students
     //Filter the name search box and display it on the table
     .filter(
       (student) =>
@@ -100,26 +130,28 @@ const renderStudents = (students) => {
     //Display student information in the table
     .map((field) => {
       return `
-    <tr class="students-value">
+    <tr class="students-value student-${field.getId()}">
+      <td><input class="user-checkbox" type="checkbox" value="${field.getId()}"/>
+    </td>
       <td>
-        <img class="img-avatar" src="${field.avatar}" alt="">
+        <img class="img-avatar" src="${field.getAvatar()}" alt="">
       </td>
-      <td>${field.name}</td>
-      <td>${field.email}</td>
-      <td>${field.phone}</td>
-      <td>${field.enrollNumber}</td>
-      <td>${field.dateOfAdmission}</td>
+      <td>${field.getName()}</td>
+      <td>${field.getEmail()}</td>
+      <td>${field.getPhone()}</td>
+      <td>${field.getEnrollNumber()}</td>
+      <td>${field.getDateOfAdmission()}</td>
       <td>
-        <button class="action-btn btn-edit" id="${field.id}">
+        <button class="action-btn btn-edit" id="${field.getId()}">
           <img src="./assets/icons/edit-icon.svg" alt="">
         </button>
-        <button class="action-btn btn-delete" id="${field.id}">
+        <button class="action-btn btn-delete" id="${field.getId()}">
           <img src="./assets/icons/delete-icon.svg" alt="">
         </button>
       </td>
     </tr>`;
     });
-  studentList.innerHTML = html.join("");
+  studentList.innerHTML = studentListTable.join("");
 
   const btnEdit = $$(".btn-edit");
   // Popup to add user when clicking on edit button.
@@ -139,9 +171,8 @@ const renderStudents = (students) => {
 };
 
 const handleSubmit = () => {
-  const id = getId();
   const formData = {
-    id: id,
+    id: Math.floor(Math.random() * 1000),
     name: nameStudent.value,
     email: emailStudent.value,
     phone: phoneStudent.value,
@@ -163,13 +194,14 @@ const handleSubmit = () => {
 
 // Delete student function
 const handleDelete = (id) => {
+  const confirm = window.confirm(
+    "Are you sure you want to delete?"
+  );
+  if (!confirm) return;
+
   deleteStudent(id).then(() => {
-    getStudent()
-      .then((student) => renderStudents(student))
-      .catch((error) => {
-        console.log(error);
-        alert("Error: " + error);
-      });
+    const student = $(`.student-${id}`);
+    student && student.remove()
   });
 };
 
@@ -193,12 +225,12 @@ const handleUpdate = (id) => {
     .then((student) => {
       student.forEach((item) => {
         if (item.id == id) {
-          nameStudent.value = item.name;
-          emailStudent.value = item.email;
-          phoneStudent.value = item.phone;
-          enrollNumber.value = item.enrollNumber;
-          dateOfAdmission.value = item.dateOfAdmission;
-          avatarPreview.src = item.avatar;
+          nameStudent.value = item.getName();
+          emailStudent.value = item.getEmail();
+          phoneStudent.value = item.getPhone();
+          enrollNumber.value = item.getEnrollNumber();
+          dateOfAdmission.value = item.getDateOfAdmission();
+          avatarPreview.src = item.getAvatar();
         }
       });
     })
@@ -241,6 +273,7 @@ const handleLogout = () => {
 btnAdd.addEventListener("click", showModal);
 btnClose.addEventListener("click", hideModal);
 btnSave.addEventListener("click", handleSubmit);
+btnDelete.addEventListener("click", handleCheckBox);
 logoutBtn.addEventListener("click", handleLogout);
 
 start();
